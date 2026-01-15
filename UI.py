@@ -1,5 +1,4 @@
 from tkinter import *
-import onnitleja
 
 def work_window():
     root.geometry('400x300')
