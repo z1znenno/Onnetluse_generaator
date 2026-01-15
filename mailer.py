@@ -6,7 +6,8 @@ import smtplib
 from email.message import EmailMessage
 
 message = EmailMessage()
-API = base64.b64decode(config.API).decode()
+API = base64.b64decode(config.API.encode()).decode()
+key = base64.b64decode(config.key.encode()).decode()
 models = ["mistralai/devstral-2512:free", "openai/gpt-oss-20b:free", "moonshotai/kimi-k2:free", "deepseek/deepseek-r1-0528:free", "google/gemma-3n-e4b-it:free"]
 
 def soovi_generaator():
@@ -44,3 +45,28 @@ def soovi_generaator():
                 print("Ma ei saa midagi teha.")
                 break
 
+def soovi_saatmine(saaja):
+    for i in range(len(saaja)):
+        email_subject = "Häid jõule"
+        sender_email_address = "order1print@gmail.com"
+        receiver_email_address = saaja[i]
+        email_smtp = "smtp.gmail.com"
+        email_password = key
+
+        message = EmailMessage()
+
+        message['Subject'] = email_subject
+        message['From'] = sender_email_address
+        message['To'] = receiver_email_address
+        soov = soovi_generaator()
+
+        message.set_content(soov)
+
+        server = smtplib.SMTP(email_smtp, '587')
+        server.ehlo()
+        server.starttls()
+
+        server.login(sender_email_address, email_password)
+        server.send_message(message)
+
+    server.quit()
