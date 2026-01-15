@@ -44,5 +44,3 @@ def soovi_generaator():
                 print("Ma ei saa midagi teha.")
                 break
 
-
-soov = soovi_generaator()

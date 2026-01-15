@@ -1,5 +1,12 @@
+import email
 from tkinter import *
 import mailer
+
+def epost_check(email):
+    if '@' in email:
+        return True
+    else:
+        return False
 
 def main_tagasi():
     btn3.pack_forget()
