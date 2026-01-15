@@ -1,3 +1,5 @@
+from logging import exception
+
 import config
 import base64
 import requests
@@ -45,28 +47,30 @@ def soovi_generaator():
                 print("Ma ei saa midagi teha.")
                 break
 
-def soovi_saatmine(saaja):
-    for i in range(len(saaja)):
+def soovi_saatmine(saajad):
+    try:
         email_subject = "Häid jõule"
         sender_email_address = "order1print@gmail.com"
-        receiver_email_address = saaja[i]
         email_smtp = "smtp.gmail.com"
         email_password = key
-
-        message = EmailMessage()
-
-        message['Subject'] = email_subject
-        message['From'] = sender_email_address
-        message['To'] = receiver_email_address
-        soov = soovi_generaator()
-
-        message.set_content(soov)
 
         server = smtplib.SMTP(email_smtp, '587')
         server.ehlo()
         server.starttls()
 
         server.login(sender_email_address, email_password)
-        server.send_message(message)
+        for saaja in saajad:
+            print("Отправка письма на:", saaja)
+            message = EmailMessage()
+            message['Subject'] = email_subject
+            message['From'] = sender_email_address
+            message['To'] = saaja
+            soov = soovi_generaator()
+            message.set_content(soov)
+            server.send_message(message)
 
-    server.quit()
+        server.quit()
+        return "Saatis"
+    except Exception as e:
+        print(e)
+        print("Тип ошибки:", type(e))

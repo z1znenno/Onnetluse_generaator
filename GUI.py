@@ -48,21 +48,25 @@ def main_tagasi():
 
 def saatma():
     saajad = kuhu.get()
-    saajad.split()
-    if '@' in saajad:
-        posti_error.pack_forget()
-        kuhu_info.pack_forget()
-        kuhu.pack_forget()
-        enter.pack_forget()
-        saatmine_Label = Label(root, text='Saadame...', font=('Comic Sans MS', 15))
-        saatmine_Label.pack()
-        mailer.soovi_saatmine(saajad)
-    else:
-        kuhu.pack_forget()
-        enter.pack_forget()
-        kuhu.pack()
-        posti_error.pack()
-        enter.pack()
+    saajad = saajad.split()
+    print(saajad)
+    for post in saajad:
+        if '@' in post:
+            posti_error.pack_forget()
+            kuhu_info.pack_forget()
+            kuhu.pack_forget()
+            enter.pack_forget()
+        else:
+            kuhu.pack_forget()
+            enter.pack_forget()
+            kuhu.pack()
+            posti_error.pack()
+            enter.pack()
+            return
+    saatmine_Label = Label(root, text='Saadame...', font=('Comic Sans MS', 15))
+    saatmine_Label.pack()
+    root.after(100, lambda: mailer.soovi_saatmine(saajad))
+    saatmine_Label.config(text="Saatis")
 
 def valjamine():
     root.destroy()
