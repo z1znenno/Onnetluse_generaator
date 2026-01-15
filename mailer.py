@@ -2,8 +2,10 @@ import config
 import base64
 import requests
 import json
-import random
+import smtplib
+from email.message import EmailMessage
 
+message = EmailMessage()
 API = base64.b64decode(config.API).decode()
 models = ["mistralai/devstral-2512:free", "openai/gpt-oss-20b:free", "moonshotai/kimi-k2:free", "deepseek/deepseek-r1-0528:free", "google/gemma-3n-e4b-it:free"]
 
