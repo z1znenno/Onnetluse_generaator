@@ -73,4 +73,4 @@ def soovi_saatmine(saajad):
         return "Saatis"
     except Exception as e:
         print(e)
-        print("Тип ошибки:", type(e))
+        print("Тип ошибки:", type(e)) 
