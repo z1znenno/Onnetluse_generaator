@@ -1,4 +1,2 @@
-API = "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"
+API = "c2stb3ItdjEtMjA1MDc0MWU0ODI2OGVjMDI4ZTRhNzllMDEwNmIzMDJjNzU3MTExZTYwNDRiOGIwYjFmZDEwNjc0YzM3ODI3Mw=="
 key = 'YWxkdyBkZmR6IGRpdWcgcWtqcQ=='
-for i in range(4):
-    print(i)
